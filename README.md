@@ -13,14 +13,15 @@ This is **not a client-approved final portfolio**. Current on-page caravan scene
 Cloudflare Pages is connected to this public GitHub repository and auto-deploys pushes to `main`.
 
 - Framework: None / static
-- Build command: `node scripts/build.mjs`
+- Build command: `npm install --no-audit --no-fund && node scripts/build.mjs`
 - Output directory: `dist`
-- Node.js: 20 or newer; no dependencies needed
+- Node.js: 20 or newer; Sharp is installed during the build to convert the transparent caravan layers to compressed WebP.
 
 The original self-contained HTML visual prototype is stored as **15 text chunks** in `.source/part-000.txt` to `.source/part-014.txt`. The build script reconstructs the HTML, extracts embedded Base64 images into fingerprinted standalone files under `dist/assets/`, de-duplicates repeated images, and emits a static site. Do not edit individual chunks manually.
 
 To rebuild locally:
 ```bash
+npm install
 node scripts/build.mjs
 ```
 
