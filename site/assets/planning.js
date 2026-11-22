@@ -1,12 +1,15 @@
 let selectedPackage = 'Flagship Model Launch (Stills + Film)';
 let baseStills = 40, baseReels = 4, modelCount = 1, shootEnv = 'Factory Bay / Yard';
 const selectedAddons = new Set();
+let previousScope = '';
 
 function updateScopeYield() {
   document.getElementById('scope-model-val').textContent = String(modelCount);
   const totalStills = baseStills * modelCount + (selectedAddons.has('Aerial Coverage') ? 8 * modelCount : 0);
-  const totalReels = baseReels + (selectedAddons.has('6x Paid Social 9:16 Reels') ? 6 : 0);
-  const filmNote = selectedPackage.includes('Dealer') ? 'Walkarounds' : 'Cuts + Film';
+  const dealerPackage = selectedPackage.includes('Dealer');
+  const totalReels = (dealerPackage ? baseReels * modelCount : baseReels) +
+    (selectedAddons.has('6x Paid Social 9:16 Reels') ? 6 : 0);
+  const filmNote = dealerPackage ? 'Walkarounds' : 'Cuts + Film';
   document.getElementById('selected-scope-summary').textContent = selectedPackage.split(' (')[0];
   document.getElementById('yield-stills').textContent = '~' + totalStills + ' Frames';
   document.getElementById('yield-reels').textContent = totalReels + ' ' + filmNote;
@@ -81,10 +84,16 @@ document.getElementById('prefill-brief-btn').addEventListener('click', () => {
   const notesField = document.getElementById('f-notes');
   if (shootSelect) shootSelect.value = selectedPackage;
   if (modelsInput) modelsInput.value = String(modelCount);
-  const addonsList = selectedAddons.size > 0 ? '\nEnrichments: ' + Array.from(selectedAddons).join(', ') : '';
+  const addonsList = selectedAddons.size > 0 ? '\nAdd-ons: ' + Array.from(selectedAddons).join(', ') : '';
   const service = document.getElementById('f-service');
   if (!service.value) service.value = 'Photography and videography';
-  notesField.value = 'Package: ' + selectedPackage + '\nEnvironment: ' + shootEnv + '\nModels: ' + modelCount + addonsList + '\n\n' + (notesField.value.split('\n\n').at(-1) || 'Additional notes: ');
+  const separator = '\n\n';
+  const previousPrefix = previousScope + separator;
+  const notes = previousScope && notesField.value.startsWith(previousPrefix)
+    ? notesField.value.slice(previousPrefix.length)
+    : notesField.value.trim();
+  previousScope = 'Package: ' + selectedPackage + '\nEnvironment: ' + shootEnv + '\nModels: ' + modelCount + addonsList;
+  notesField.value = previousScope + separator + notes;
   notesField.dispatchEvent(new Event('input', { bubbles: true }));
   document.getElementById('f-company').focus({ preventScroll: true });
   document.getElementById('enquiry').scrollIntoView();
@@ -121,24 +130,20 @@ const CHANNEL_TIERS = {
 const channelMatrixEl = document.getElementById('channel-matrix');
 function renderChannelTier(tierKey) {
   const items = CHANNEL_TIERS[tierKey] || CHANNEL_TIERS.launch;
-  channelMatrixEl.innerHTML = items.map((item, idx) => `
-    <div class="p-6 bg-ivory hairline-all flex flex-col justify-between">
-      <div>
-        <div class="flex items-center justify-between gap-2">
-          <span class="font-mono text-[10px] font-semibold text-bronze">0${idx + 1}</span>
-          <span class="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 bg-alabaster hairline-all text-umber">${item.spec}</span>
-        </div>
-        <h3 class="mt-3 font-editorial text-2xl text-espresso">${item.ch}</h3>
-        <p class="mt-2 text-xs sm:text-sm text-umber leading-relaxed">${item.desc}</p>
-      </div>
-    </div>
+  channelMatrixEl.innerHTML = items.map(item => `
+    <article class="channel-item">
+      <h3>${item.ch}</h3>
+      <p>${item.desc}</p>
+      <span>${item.spec}</span>
+    </article>
   `).join('');
 }
 
 document.querySelectorAll('.tier-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.tier-btn').forEach(b => { b.setAttribute('aria-pressed', String(b === btn)); b.classList.remove('bg-espresso', 'text-ivory'); b.classList.add('border', 'border-sand', 'bg-ivory', 'text-umber'); });
-    btn.classList.add('bg-espresso', 'text-ivory'); btn.classList.remove('border', 'border-sand', 'bg-ivory', 'text-umber');
+    document.querySelectorAll('.tier-btn').forEach(button => {
+      button.setAttribute('aria-pressed', String(button === btn));
+    });
     renderChannelTier(btn.dataset.tier);
   });
 });

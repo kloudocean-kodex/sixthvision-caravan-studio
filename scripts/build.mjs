@@ -51,6 +51,8 @@ const hasWork = media && (media.photos?.length || media.films?.length);
 const studies = [
   ['Exterior', 'Exterior under shaped light', 'Charcoal caravan seen from the front in a sunlit architectural space', 'image-6587a0c6cf45ab434ed5.jpg'],
   ['Exterior', 'The rear angle', 'Rear three-quarter view of a charcoal caravan', 'image-1b0f453ac53b105d3956.jpg'],
+  ['Cutaway', 'Opening the roofline', 'Raised caravan roof showing the warm cabin below', 'image-185e869879ac6db332d4.jpg'],
+  ['Cutaway', 'The layered exterior', 'Caravan body, interior and chassis shown as separate layers', 'image-1feda8107a93f8d775d3.jpg'],
   ['Interior', 'Lighting the galley', 'Warm wood cabinetry and a lit kitchen counter', 'image-acdd721918f82670dd32.jpg'],
   ['Interior', 'Light across the cabin', 'Soft light falling on a made bed inside a caravan', 'image-0f6b4e680e3720cd6e38.jpg'],
   ['Interior', 'Framing a compact room', 'Bathroom with a bronze tap and pale wall finish', 'image-0394968101e430940eec.jpg'],
@@ -73,9 +75,7 @@ function gallery(items) {
 }
 
 function portfolio() {
-  if (!hasWork) return '<h2>Photography &amp; Films</h2>' +
-    '<p class="work-intro">Explore SixthVision’s published commercial photography and film work. Get in touch to discuss a caravan campaign.</p>' +
-    '<a class="text-link" href="https://sixthvisioncommercial.com.au/portfolio/">View the commercial portfolio <span aria-hidden="true">↗</span></a>';
+  if (!hasWork) return '';
   const photos = media.photos || [];
   const films = media.films || [];
   const galleryMarkup = photos.length ? gallery(photos.map(image => ({
@@ -88,39 +88,68 @@ function portfolio() {
     escape(film.file) + '-title" poster="' + sourceAsset(film.poster, 'image') + '" src="' + sourceAsset(film.file, 'film') + '">' +
     (film.captions ? '<track kind="captions" srclang="en" label="English" src="' + sourceAsset(film.captions, 'track') + '">' : '') +
     '</video><h3 id="' + escape(film.file) + '-title">' + escape(film.title) + '</h3><p>' + escape(film.caption) + '</p></article>').join('\n') + '</div>' : '';
-  return '<h2>Selected Photography &amp; Films</h2><p class="project-name">' + escape(media.project?.name) +
-    '</p><p class="work-intro">' + escape(media.project?.description) + '</p>' + galleryMarkup + filmMarkup;
+  return '<section id="work" class="work-section" aria-labelledby="work-title"><div class="shell">' +
+    '<h2 id="work-title">Selected Caravan Photography &amp; Films</h2><p class="project-name">' +
+    escape(media.project?.name) + '</p><p class="work-intro">' + escape(media.project?.description) + '</p>' +
+    galleryMarkup + filmMarkup + '</div></section>';
 }
 
 const hero = media?.hero;
-const socialImage = hero ? sourceAsset(hero.file, 'image') : studyFolder + 'lighting-study-hero.webp';
-const photo = hero ? responsiveImage(hero, { eager: true }) :
-  '<img src="' + studyFolder + 'lighting-study-hero.webp" srcset="' + studyFolder +
-  'lighting-study-hero-small.webp 720w, ' + studyFolder + 'lighting-study-hero.webp 1376w" ' +
-  'sizes="(max-width: 680px) 92vw, 49vw" width="1376" height="768" alt="' +
-  escape(studies[0][2]) + '" fetchpriority="high" decoding="async">';
-const heroMarkup = hero
-  ? '<figure class="hero-media">' + photo + '<figcaption class="hero-media-caption">' + escape(hero.caption) + '</figcaption></figure>'
-  : '<figure class="hero-media"><a class="hero-media-link" href="#disassembly">' + photo +
-    '<span class="hero-media-caption">Interactive lighting study <span aria-hidden="true">↓</span></span></a></figure>';
+const cinematicAlt = 'Cream and charcoal caravan lit from the side in a warm architectural studio';
+const socialImage = hero ? sourceAsset(hero.file, 'image') : studyFolder + 'cinematic-hero.webp';
+const photo = hero ? responsiveImage(hero, { eager: true, sizes: '100vw' }) :
+  '<img src="' + socialImage + '" srcset="' + studyFolder + 'cinematic-hero-small.webp 640w, ' +
+  studyFolder + 'cinematic-hero-mid.webp 960w, ' + socialImage + ' 1774w" ' +
+  'sizes="(max-width: 680px) 170vw, (max-width: 1000px) 135vw, 100vw" width="1774" height="887" alt="' +
+  escape(cinematicAlt) + '" fetchpriority="high" decoding="async">';
+const heroMarkup = '<div class="hero-media' + (hero ? ' is-project' : '') + '">' + photo + '</div>';
 
-const organization = {
+const organizationId = 'https://sixthvision.com.au/#organization';
+const areaServed = [
+  { '@type': 'City', name: 'Melbourne' },
+  { '@type': 'AdministrativeArea', name: 'Victoria' },
+];
+const services = [
+  ['product-photography', 'Caravan product photography', 'Exterior hero shots, model angles and close-ups for websites, brochures and dealer listings.'],
+  ['interior-photography', 'Caravan interior photography', 'Wide cabin views and photographs of materials, joinery and finishes.'],
+  ['caravan-films', 'Caravan launch films and dealership video', 'Model launch films, dealer walkthroughs and short edits for advertising and social.'],
+];
+const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'SixthVision',
-  url: 'https://sixthvision.com.au/',
-  telephone: '+61 474 126 276',
-  areaServed: { '@type': 'City', name: 'Melbourne' },
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': organizationId,
+      name: 'SixthVision',
+      url: 'https://sixthvision.com.au/',
+      telephone: '+61 474 126 276',
+      areaServed,
+    },
+    ...services.map(([anchor, name, description]) => {
+      const url = new URL('#' + anchor, canonical).href;
+      return {
+        '@type': 'Service',
+        '@id': url,
+        url,
+        name,
+        serviceType: name,
+        description,
+        provider: { '@id': organizationId },
+        areaServed,
+      };
+    }),
+  ],
 };
 const social = '<link rel="canonical" href="' + escape(canonical.href) + '">\n  ' +
   '<meta property="og:url" content="' + escape(canonical.href) + '">\n  ' +
   '<meta property="og:image" content="' + escape(new URL(socialImage, canonical).href) + '">\n  ' +
-  '<meta property="og:image:alt" content="' + escape(hero?.alt || studies[0][2]) + '">\n  ' +
+  '<meta property="og:image:alt" content="' + escape(hero?.alt || cinematicAlt) + '">\n  ' +
   '<meta name="twitter:image" content="' + escape(new URL(socialImage, canonical).href) + '">\n  ' +
-  '<script type="application/ld+json">' + JSON.stringify(organization) + '</script>';
+  '<script type="application/ld+json">' + JSON.stringify(structuredData) + '</script>';
 const studyGallery = gallery(studies.map(([category, title, alt, file]) => ({
   category, title, full: studyFolder + file,
-  image: '<img loading="lazy" decoding="async" src="' + studyFolder + file + '" alt="' + escape(alt) + '">',
+  image: '<img loading="lazy" decoding="async" src="' + studyFolder + 'thumbs/' +
+    file.replace(/\.jpg$/, '.webp') + '" alt="' + escape(alt) + '">',
 })));
 const handoff = media?.handoff || hero;
 const studyHandoff = handoff ? '<img id="plate-handoff" loading="lazy" alt="" data-src="' +
@@ -128,7 +157,9 @@ const studyHandoff = handoff ? '<img id="plate-handoff" loading="lazy" alt="" da
 
 const replacements = {
   SOCIAL_METADATA: social, HERO_MEDIA: heroMarkup, STUDY_HANDOFF: studyHandoff,
-  STUDY_GALLERY: studyGallery, PORTFOLIO: portfolio(),
+  STUDY_GALLERY: studyGallery,
+  WORK_ANCHOR: hasWork ? '' : '<span id="work" class="legacy-anchor" aria-hidden="true"></span>',
+  PORTFOLIO: portfolio(),
 };
 let html = readFileSync(join(site, 'index.html'), 'utf8');
 for (const [key, markup] of Object.entries(replacements)) {

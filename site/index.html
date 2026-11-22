@@ -31,46 +31,49 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
       </button>
       <nav id="primary-nav" aria-label="Primary">
-        <a href="#work">Photography &amp; Films</a>
         <a href="#services">Services</a>
-        <a href="#disassembly">Visual Study</a>
-        <a href="#packages">Packages</a>
-        <a href="#studio">About</a>
+        <a href="#visual-studies">Visual Studies</a>
+        <a href="#packages">Shoot Planner</a>
+        <a href="#process">How We Work</a>
         <a class="nav-contact" href="#enquiry">Discuss Your Shoot</a>
       </nav>
     </div>
   </header>
   <main id="main-content" tabindex="-1">
-    <section id="top" class="hero shell">
-      <div class="hero-copy">
-        <p class="eyebrow">Commercial stills &amp; motion</p>
-        <h1><span>Caravan Photography</span> <em>&amp; Videography</em> <span>in Melbourne</span></h1>
-        <p class="hero-intro">Commercial photography and launch films for caravan and RV manufacturers and dealers. From exterior hero shots to interior details, we create imagery for your website, brochures and campaigns.</p>
-        <div class="hero-actions">
-          <a class="action primary" href="#enquiry">Discuss Your Shoot</a>
-          <a class="action secondary" href="#work">View Photography &amp; Films</a>
+    <section id="top" class="hero" aria-labelledby="hero-title">
+      <!-- HERO_MEDIA -->
+      <div class="shell hero-inner">
+        <div class="hero-copy">
+          <h1 id="hero-title"><span>Caravan Photography</span> <em>&amp; Videography</em> <span class="hero-location">in Melbourne</span></h1>
+          <p class="hero-intro">Commercial stills and launch films for caravan and RV manufacturers and dealers across Victoria.</p>
+          <div class="hero-actions">
+            <a class="action primary" href="#enquiry">Discuss Your Shoot</a>
+            <a class="action secondary" href="#visual-studies">Explore Visual Studies <span aria-hidden="true">↓</span></a>
+          </div>
         </div>
       </div>
-      <!-- HERO_MEDIA -->
     </section>
-    <section id="services" class="service-section">
+    <section id="services" class="service-section" aria-labelledby="services-title">
       <div class="shell">
         <div class="section-lead">
-          <h2>Caravan photography &amp; film services</h2>
+          <h2 id="services-title">Caravan photography &amp; film services</h2>
           <a class="text-link" href="#packages">Plan your shoot <span aria-hidden="true">↗</span></a>
         </div>
         <div class="service-grid">
-          <article id="product-photography">
+          <article id="product-photography" class="service-card">
+            <div class="service-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h5l2-4h8l2 4h5v13H5z"/><circle cx="16" cy="18" r="4.2"/><path d="M23.5 15.5h.5"/></svg></div>
             <h3>Caravan product photography</h3>
-            <p>Exterior hero images, model angles and close-ups for your website, brochures and dealer listings. We plan lighting and framing so a range reads consistently across every channel.</p>
+            <p>Exterior hero shots, consistent model angles and close-ups for websites, brochures and dealer listings.</p>
           </article>
-          <article id="interior-photography">
-            <h3>Commercial interior photography</h3>
-            <p>Careful lighting and architectural framing show how the space feels, from a wide cabin view to a close-up of joinery, upholstery or finishes.</p>
+          <article id="interior-photography" class="service-card">
+            <div class="service-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 8h22v16H5zM5 24l7-5h8l7 5M12 19V8m8 11V8M5 27h22"/></svg></div>
+            <h3>Caravan interior photography</h3>
+            <p>Wide cabin views and material details, lit to show the layout, joinery and finishes clearly.</p>
           </article>
-          <article id="caravan-films">
-            <h3>Launch films &amp; dealership video</h3>
-            <p>Introduce a new model with a launch film, show its layout in a walkthrough, or cut a shoot into short promotional edits for social and advertising.</p>
+          <article id="caravan-films" class="service-card">
+            <div class="service-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4.5" y="7" width="23" height="18" rx="1.5"/><path d="m14 12 7 4-7 4zM9 7v18M23 7v18"/></svg></div>
+            <h3>Launch films &amp; dealer video</h3>
+            <p>Model launch films, dealer walkthroughs and short edits for advertising and social.</p>
           </article>
         </div>
       </div>
@@ -83,7 +86,7 @@
               <h2 id="study-title">A Caravan Through Our Lens</h2>
               <p>An interactive lighting and camera study.</p>
             </div>
-            <a class="text-link" href="#work">Skip to photography &amp; films <span aria-hidden="true">↓</span></a>
+            <a class="text-link" href="#visual-studies">Skip to the gallery <span aria-hidden="true">↓</span></a>
           </div>
           <div class="study-layout">
             <div id="explode-viewport" role="group" aria-label="Caravan exterior, cutaway, interior and lower detail">
@@ -129,32 +132,24 @@
           </div>
         </div>
       </div>
-      <details id="study-gallery" class="study-gallery shell">
-        <summary>Explore the visual studies</summary>
-        <!-- STUDY_GALLERY -->
-      </details>
-      <p class="study-credit shell">Digital visualisation by SixthVision.</p>
     </section>
-    <section id="work" class="work-section">
+    <section id="visual-studies" class="study-gallery" aria-labelledby="visual-studies-title">
       <div class="shell">
-        <!-- PORTFOLIO -->
+        <!-- WORK_ANCHOR -->
+        <div class="section-lead">
+          <h2 id="visual-studies-title">Caravan visual studies</h2>
+          <a class="text-link" href="#disassembly">View the interactive study <span aria-hidden="true">↑</span></a>
+        </div>
+        <!-- STUDY_GALLERY -->
+        <p class="study-credit">Digital visualisations by SixthVision.</p>
       </div>
     </section>
-    <section id="packages" class="py-20 sm:py-28 bg-travertine hairline-b">
-
-      <div class="max-w-7xl mx-auto px-5 sm:px-8">
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-10 hairline-b">
-          <div class="max-w-2xl">
-
-            <h2 class="font-editorial text-4xl sm:text-6xl text-espresso mt-2">Plan Your Caravan Shoot</h2>
-            <p class="mt-2 text-xs text-umber">Example shoot scopes. Quantities and deliverables are confirmed with your quote.</p>
-            <p class="mt-4 text-sm sm:text-base text-umber leading-relaxed">
-              Explore sample packages, adjust the requested model count and add-ons, then send a detailed production brief for an accurate quotation.
-            </p>
-          </div>
-          <p class="font-mono text-[11px] text-umber max-w-xs lg:text-right">
-            Usage rights, output quantities and delivery formats to be agreed in the production quotation.
-          </p>
+    <!-- PORTFOLIO -->
+    <section id="packages" class="planner-section" aria-labelledby="planner-title">
+      <div class="shell">
+        <div class="section-lead planning-lead">
+          <h2 id="planner-title">Plan Your Caravan Shoot</h2>
+          <p>Choose a starting point, then adjust the models, location and add-ons. Deliverables and usage are confirmed in your quote.</p>
         </div>
 
         <!-- Step 1: 3 Minimal Architectural Package Columns with Bespoke Hairline SVGs -->
@@ -184,7 +179,7 @@
                 <li class="flex justify-between gap-2"><span class="text-umber">Exports</span><span class="font-medium">WebP + Listing Portals</span></li>
               </ul>
             </div>
-            <button type="button" class="pkg-select-btn mt-8 w-full py-3 border border-sand bg-alabaster text-espresso font-mono text-[11px] uppercase tracking-[0.14em] hover:border-bronze transition-colors">
+            <button type="button" aria-pressed="false" class="pkg-select-btn mt-8 w-full py-3 border border-sand bg-alabaster text-espresso font-mono text-[11px] uppercase tracking-[0.14em] hover:border-bronze transition-colors">
               Select Package
             </button>
           </article>
@@ -210,7 +205,7 @@
                 <li class="flex justify-between gap-2"><span class="text-umber">Print Ready</span><span class="font-medium">16-Bit Brochure Masters</span></li>
               </ul>
             </div>
-            <button type="button" class="pkg-select-btn mt-8 w-full py-3 bg-espresso text-ivory font-mono text-[11px] uppercase tracking-[0.14em] hover:bg-bronze transition-colors">
+            <button type="button" aria-pressed="true" class="pkg-select-btn mt-8 w-full py-3 bg-espresso text-ivory font-mono text-[11px] uppercase tracking-[0.14em] hover:bg-bronze transition-colors">
               Selected
             </button>
           </article>
@@ -238,14 +233,14 @@
                 <li class="flex justify-between gap-2"><span class="text-umber">Dealer Kit</span><span class="font-medium">National Co-Op Asset Bank</span></li>
               </ul>
             </div>
-            <button type="button" class="pkg-select-btn mt-8 w-full py-3 border border-sand bg-alabaster text-espresso font-mono text-[11px] uppercase tracking-[0.14em] hover:border-bronze transition-colors">
+            <button type="button" aria-pressed="false" class="pkg-select-btn mt-8 w-full py-3 border border-sand bg-alabaster text-espresso font-mono text-[11px] uppercase tracking-[0.14em] hover:border-bronze transition-colors">
               Select Package
             </button>
           </article>
         </div>
 
         <!-- Step 2: Minimal Editorial Scope Configurator Bar -->
-        <div class="mt-6 bg-ivory hairline-all p-6 sm:p-8">
+        <div class="scope-panel">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
             <!-- Left Controls (8 cols) -->
@@ -255,9 +250,9 @@
                 <div>
                   <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-umber mb-2.5">Number of Models</p>
                   <div class="inline-flex items-center hairline-all bg-alabaster">
-                    <button id="scope-model-dec" type="button" aria-label="Remove a model" class="w-10 h-10 font-mono text-base text-espresso hover:bg-travertine" aria-label="Decrease models">−</button>
+                    <button id="scope-model-dec" type="button" aria-label="Remove a model" class="w-10 h-10 font-mono text-base text-espresso hover:bg-travertine">−</button>
                     <span id="scope-model-val" class="w-14 text-center font-mono text-sm font-medium text-espresso">1</span>
-                    <button id="scope-model-inc" type="button" aria-label="Add a model" class="w-10 h-10 font-mono text-base text-espresso hover:bg-travertine" aria-label="Increase models">+</button>
+                    <button id="scope-model-inc" type="button" aria-label="Add a model" class="w-10 h-10 font-mono text-base text-espresso hover:bg-travertine">+</button>
                   </div>
                 </div>
 
@@ -277,19 +272,19 @@
                 <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-umber mb-2.5">Optional Add-ons</p>
                 <p class="text-xs text-umber mb-2">Aerial coverage is subject to location and flight permissions.</p>
                 <div class="flex flex-wrap gap-2" id="addon-toggles">
-                  <button type="button" data-addon="Aerial Coverage" class="addon-btn inline-flex items-center gap-2 px-3.5 py-2 text-xs font-mono border border-sand bg-alabaster text-espresso hover:border-bronze transition-colors">
+                  <button type="button" data-addon="Aerial Coverage" aria-pressed="false" class="addon-btn inline-flex items-center gap-2 px-3.5 py-2 text-xs font-mono border border-sand bg-alabaster text-espresso hover:border-bronze transition-colors">
                     <svg class="w-3.5 h-3.5 text-bronze" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8 8l8 8M16 8l-8 8"/></svg>
                     <span>Aerial Coverage</span>
                   </button>
-                  <button type="button" data-addon="Factory Craft Mini-Doc" class="addon-btn inline-flex items-center gap-2 px-3.5 py-2 text-xs font-mono border border-sand bg-alabaster text-espresso hover:border-bronze transition-colors">
+                  <button type="button" data-addon="Factory Craft Mini-Doc" aria-pressed="false" class="addon-btn inline-flex items-center gap-2 px-3.5 py-2 text-xs font-mono border border-sand bg-alabaster text-espresso hover:border-bronze transition-colors">
                     <svg class="w-3.5 h-3.5 text-bronze" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="13" height="12" rx="1.5"/><path d="M16 10l5-3v10l-5-3z"/></svg>
                     <span>Factory Craft Film</span>
                   </button>
-                  <button type="button" data-addon="6x Paid Social 9:16 Reels" class="addon-btn inline-flex items-center gap-2 px-3.5 py-2 text-xs font-mono border border-sand bg-alabaster text-espresso hover:border-bronze transition-colors">
+                  <button type="button" data-addon="6x Paid Social 9:16 Reels" aria-pressed="false" class="addon-btn inline-flex items-center gap-2 px-3.5 py-2 text-xs font-mono border border-sand bg-alabaster text-espresso hover:border-bronze transition-colors">
                     <svg class="w-3.5 h-3.5 text-bronze" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M10.5 18.5h3"/></svg>
                     <span>6× Paid Social Reels</span>
                   </button>
-                  <button type="button" data-addon="Interactive Interactive Visualisation" class="addon-btn inline-flex items-center gap-2 px-3.5 py-2 text-xs font-mono border border-sand bg-alabaster text-espresso hover:border-bronze transition-colors">
+                  <button type="button" data-addon="Interactive Visualisation" aria-pressed="false" class="addon-btn inline-flex items-center gap-2 px-3.5 py-2 text-xs font-mono border border-sand bg-alabaster text-espresso hover:border-bronze transition-colors">
                     <svg class="w-3.5 h-3.5 text-bronze" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>
                     <span>Interactive Visualisation</span>
                   </button>
@@ -298,11 +293,11 @@
             </div>
 
             <!-- Right Live Deliverables Readout (4 cols) -->
-            <div class="lg:col-span-4 bg-alabaster hairline-all p-5 flex flex-col justify-between">
+            <div class="scope-summary lg:col-span-4" role="group" aria-label="Estimated deliverables">
               <div>
                 <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-bronze">Estimated Deliverables</p>
                 <p id="selected-scope-summary" class="font-editorial text-2xl text-espresso mt-1">Flagship Model Launch</p>
-                <div class="mt-4 pt-3 hairline-t grid grid-cols-2 gap-3 font-mono text-xs">
+                <div class="scope-estimates" aria-live="polite">
                   <div>
                     <span class="block text-[10px] text-umber uppercase">Retouched Stills</span>
                     <span id="yield-stills" class="text-base font-medium text-espresso">~40 Frames</span>
@@ -313,84 +308,64 @@
                   </div>
                 </div>
               </div>
-              <button id="prefill-brief-btn" type="button" class="mt-5 w-full py-3 bg-espresso text-ivory text-[11px] font-semibold uppercase tracking-[0.14em] hover:bg-bronze transition-colors">
-                Send Scope to Brief →
+              <button id="prefill-brief-btn" type="button" class="scope-cta">
+                Use This Scope in Your Brief <span aria-hidden="true">↗</span>
               </button>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section id="system" class="py-20 sm:py-28 bg-travertine hairline-b">
-      <div class="max-w-7xl mx-auto px-5 sm:px-8">
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-          <div class="max-w-2xl">
-
-            <h2 class="font-editorial text-4xl sm:text-6xl text-espresso mt-2">From One Shoot to Every Channel</h2>
-            <p class="mt-4 text-sm sm:text-base text-umber leading-relaxed">
-              Plan each production around the specific website, dealer, print, film and social assets your campaign actually needs.
-            </p>
-          </div>
-          <div class="flex flex-wrap gap-2" role="group" aria-label="Production type">
-            <button type="button" data-tier="launch" aria-pressed="true" class="tier-btn px-4 py-2.5 text-xs font-mono uppercase tracking-wider bg-espresso text-ivory">Flagship Launch</button>
-            <button type="button" data-tier="range" aria-pressed="false" class="tier-btn px-4 py-2.5 text-xs font-mono uppercase tracking-wider border border-sand bg-ivory text-umber hover:text-espresso">Full Range Day</button>
-            <button type="button" data-tier="dealer" aria-pressed="false" class="tier-btn px-4 py-2.5 text-xs font-mono uppercase tracking-wider border border-sand bg-ivory text-umber hover:text-espresso">Dealer Stock Batch</button>
-          </div>
+    <section id="system" class="channel-section" aria-labelledby="channel-title">
+      <div class="shell">
+        <div class="section-lead planning-lead">
+          <h2 id="channel-title">From One Shoot to Every Channel</h2>
+          <p>See how the stills and edits can be delivered for your website, dealer network, print and social.</p>
         </div>
-        <div id="channel-matrix" class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+        <div class="channel-tabs" role="group" aria-label="Production type">
+          <button type="button" data-tier="launch" aria-pressed="true" class="tier-btn">Flagship Launch</button>
+          <button type="button" data-tier="range" aria-pressed="false" class="tier-btn">Full Range Day</button>
+          <button type="button" data-tier="dealer" aria-pressed="false" class="tier-btn">Dealer Stock Batch</button>
+        </div>
+        <div id="channel-matrix" class="channel-grid" aria-live="polite"></div>
       </div>
     </section>
-    <section id="process" class="py-20 sm:py-28 bg-alabaster hairline-b">
-      <div class="max-w-7xl mx-auto px-5 sm:px-8">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-10 hairline-b">
-          <div>
-
-            <h2 class="font-editorial text-4xl sm:text-5xl text-espresso mt-2">How We Work</h2>
-          </div>
-          <p class="text-xs sm:text-sm text-umber max-w-md">
-            A proposed workflow that can be tailored to Melbourne manufacturing schedules, location access and vehicle logistics.
-          </p>
+    <section id="process" class="process-section" aria-labelledby="process-title">
+      <div class="shell">
+        <div class="section-lead">
+          <h2 id="process-title">How We Work</h2>
+          <a class="text-link" href="#enquiry">Discuss your shoot <span aria-hidden="true">↗</span></a>
         </div>
-
-        <ol class="mt-10 grid grid-cols-1 md:grid-cols-5 gap-5">
-          <li class="p-6 bg-ivory hairline-all">
-            <span class="font-mono text-xs font-semibold text-bronze">01</span>
-            <h3 class="mt-3 text-base font-semibold text-espresso">Discovery &amp; Brief</h3>
-            <p class="mt-2 text-xs text-umber leading-relaxed">Tell us which models you need to show, who the work is for and where it will be used.</p>
+        <ol class="process-list">
+          <li>
+            <div class="process-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 8h22v14H14l-5 4v-4H5zM9 13h14M9 17h9"/></svg></div>
+            <h3>Brief</h3>
+            <p>Share your models, launch date and where the work will be used.</p>
           </li>
-          <li class="p-6 bg-ivory hairline-all">
-            <span class="font-mono text-xs font-semibold text-bronze">02</span>
-            <h3 class="mt-3 text-base font-semibold text-espresso">Shot List &amp; Prep</h3>
-            <p class="mt-2 text-xs text-umber leading-relaxed">We agree on the shot list, location and styling before the shoot.</p>
+          <li>
+            <div class="process-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="8" y="7" width="16" height="20" rx="1.5"/><path d="M12 7V4h8v3m-8 6h8m-8 5h8m-8 5h5"/></svg></div>
+            <h3>Shot list</h3>
+            <p>We agree on the location, lighting and frames to capture.</p>
           </li>
-          <li class="p-6 bg-ivory hairline-all">
-            <span class="font-mono text-xs font-semibold text-bronze">03</span>
-            <h3 class="mt-3 text-base font-semibold text-espresso">Production Day</h3>
-            <p class="mt-2 text-xs text-umber leading-relaxed">We light and photograph the vehicle and film the agreed shots on location.</p>
+          <li>
+            <div class="process-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h5l2-4h8l2 4h5v13H5z"/><circle cx="16" cy="18" r="4.2"/></svg></div>
+            <h3>Shoot</h3>
+            <p>We photograph the stills and film on location or in the studio.</p>
           </li>
-          <li class="p-6 bg-ivory hairline-all">
-            <span class="font-mono text-xs font-semibold text-bronze">04</span>
-            <h3 class="mt-3 text-base font-semibold text-espresso">Edit &amp; Grade</h3>
-            <p class="mt-2 text-xs text-umber leading-relaxed">We retouch stills, edit the films and grade colour to keep the campaign consistent.</p>
+          <li>
+            <div class="process-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 9h22M5 16h22M5 23h22"/><circle cx="11" cy="9" r="2.5" fill="var(--ivory)"/><circle cx="21" cy="16" r="2.5" fill="var(--ivory)"/><circle cx="14" cy="23" r="2.5" fill="var(--ivory)"/></svg></div>
+            <h3>Edit &amp; grade</h3>
+            <p>We retouch the images, edit the film and match the colour across both.</p>
           </li>
-          <li class="p-6 bg-ivory hairline-all">
-            <span class="font-mono text-xs font-semibold text-bronze">05</span>
-            <h3 class="mt-3 text-base font-semibold text-espresso">Channel Handoff</h3>
-            <p class="mt-2 text-xs text-umber leading-relaxed">Receive files for the agreed channels and confirm how they can be used.</p>
+          <li>
+            <div class="process-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 5v15m-5-5 5 5 5-5M6 20v6h20v-6"/></svg></div>
+            <h3>Delivery</h3>
+            <p>Receive stills and edits sized for the channels agreed in your brief.</p>
           </li>
         </ol>
       </div>
     </section>
-    <section id="studio" class="studio-about">
-      <div class="shell about-grid">
-        <h2>Behind the camera at SixthVision</h2>
-        <div>
-          <p>SixthVision is a Melbourne photography and film studio. We plan the shoot with your team, shape the light on location and edit the stills and films around where you need to use them.</p>
-          <a class="text-link" href="https://sixthvisioncommercial.com.au/">Explore SixthVision’s commercial work <span aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-    </section>
-    <section id="enquiry" class="py-20 sm:py-28 bg-travertine">
+    <section id="enquiry" class="enquiry-section py-20 sm:py-28 bg-travertine">
       <div class="max-w-5xl mx-auto px-5 sm:px-8">
         <div class="text-center max-w-2xl mx-auto">
 
@@ -495,7 +470,7 @@
     <div class="shell footer-inner">
       <div><strong>SixthVision</strong><p>Caravan Photography &amp; Film · Melbourne, Victoria</p></div>
       <nav aria-label="Footer">
-        <a href="#work">Photography &amp; Films</a>
+        <a href="#visual-studies">Visual Studies</a>
         <a href="#services">Services</a>
         <a href="#enquiry">Contact</a>
       </nav>
