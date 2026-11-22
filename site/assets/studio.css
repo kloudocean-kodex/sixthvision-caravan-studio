@@ -13,8 +13,8 @@
 }
 @font-face {
   font-family: "Barlow Condensed";
-  src: url("/assets/fonts/barlow-condensed-hero-regular.woff2") format("woff2");
-  font-weight: 400;
+  src: url("/assets/fonts/barlow-condensed-hero-light.woff2") format("woff2");
+  font-weight: 300;
   font-display: swap;
 }
 @font-face {
@@ -24,8 +24,8 @@
 }
 @font-face {
   font-family: "Cinzel";
-  src: url("/assets/fonts/cinzel-hero.woff2") format("woff2");
-  font-weight: 450;
+  src: url("/assets/fonts/cinzel-hero-regular.woff2") format("woff2");
+  font-weight: 400;
   font-display: swap;
 }
 @font-face {
@@ -119,13 +119,13 @@ body {
 .hero-inner { display: flex; align-items: center; padding-block: clamp(62px, 9vw, 132px); }
 .hero-copy { max-width: min(54%, 660px); }
 .hero h1 {
-  font: 400 clamp(30px, 4.44vw, 65px)/1.01 "Barlow Condensed", "Barlow Hero Fallback", sans-serif;
+  font: 300 clamp(30px, 4.44vw, 65px)/1.01 "Barlow Condensed", "Barlow Hero Fallback", sans-serif;
   letter-spacing: .039em; margin: 0; text-wrap: balance; text-transform: uppercase;
 }
 .hero h1 span, .hero h1 em { display: block; }
 .hero h1 em {
   color: #f0d2ad;
-  font: 450 .94em/1.02 "Cinzel", "Times New Roman", serif;
+  font: 400 .94em/1.02 "Cinzel", "Times New Roman", serif;
   letter-spacing: .015em;
   margin-top: .13em;
 }
