@@ -1,39 +1,20 @@
-# SixthVision Caravan Studio
+# SixthVision Caravan Photography & Film
 
-Live Cloudflare Pages development preview: https://sixthvision-caravan-studio.pages.dev
+A static SixthVision studio site for Melbourne caravan and RV manufacturers and dealers. The site combines commercial service sections, a responsive interactive lighting study, project galleries, a shoot planner and a local enquiry brief.
 
-A responsive static portfolio for caravan and RV commercial photography, with a scroll-controlled illustrative 2.5D caravan disassembly, project galleries, package planner, and enquiry brief generator.
+## Build and review
 
-## Status — development preview
+- **Build:** npm run build
+- **Public branch output:** dist/
+- **Source:** site/index.html and site/assets/. The branch build uses Node.js only. No runtime framework or CDN CSS is required.
+- **Local server:** python -m http.server 8000 --bind 127.0.0.1 --directory dist
 
-This is **not a client-approved final portfolio**. Current on-page caravan scenes and component diagrams are **illustrative concept assets**, not Ankkush's original Billabong project photos, film footage, or manufacturer engineering CAD. The enquiry builder **does not send messages**: it prepares a brief locally for review. Search indexing is intentionally disabled pending media approval, legal details, and live form delivery.
+The existing Cloudflare Pages build command and dist output still work. site/assets/study contains artwork migrated from the original prototype. The artwork is presented as a digital visualisation across the hero, interactive sequence and study gallery.
 
-## Build
+## Photography and films
 
-Cloudflare Pages is connected to this public GitHub repository and auto-deploys pushes to `main`.
+The public build reads approved-media/manifest.json only if present. Set release to approved only with documented photographer, client, brand and applicable music clearances. Copy in optimised derivatives, posters and caption tracks. The build copies only the files referenced by the manifest.
 
-- Framework: None / static
-- Build command: `npm install --no-audit --no-fund && node scripts/build.mjs`
-- Output directory: `dist`
-- Node.js: 20 or newer; Sharp is installed during the build to convert the transparent caravan layers to compressed WebP.
+For private local review, run node scripts/build.mjs --review-media PATH_TO_LOCAL_MANIFEST_DIRECTORY, then serve dist-review on loopback. This output is separate from dist and is ignored by Git. The local input directory can live outside the checkout. Keep review derivatives and source material out of issue comments, GitHub assets and Cloudflare Pages.
 
-The original self-contained HTML visual prototype is stored as **15 text chunks** in `.source/part-000.txt` to `.source/part-014.txt`. The build script reconstructs the HTML, extracts embedded Base64 images into fingerprinted standalone files under `dist/assets/`, de-duplicates repeated images, and emits a static site. Do not edit individual chunks manually.
-
-To rebuild locally:
-```bash
-npm install
-node scripts/build.mjs
-```
-
-Deployable files then exist in `dist/`.
-
-## Launch requirements
-
-1. Replace illustrative visuals with approved, genuine photography and compressed final films.
-2. Obtain approval for Billabong brand usage and any third-party imagery/music rights.
-3. Implement and test real enquiries, notification delivery, validation, and spam control.
-4. Verify business contact details, privacy policy, and claims.
-5. Audit the hosted desktop/mobile site and performance.
-6. Only then remove `noindex,nofollow` and update `robots.txt`.
-
-See `AUDIT.md` for the local QA scope. This project is deliberately separate from the existing SixthVision commercial website.
+See DEPLOYMENT.md for the manifest shape and release checks, and AUDIT.md for research and testing notes.
