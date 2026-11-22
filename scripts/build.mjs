@@ -32,6 +32,8 @@ for (const asset of assets) {
   const output = asset.isPng ? await sharp(asset.bytes).webp({ quality:84, effort:5 }).toBuffer() : asset.bytes;
   writeFileSync(join(out,asset.pathname.slice(1)), output);
 }
+// Cloudflare preview: remove Netlify-only form parsing; this form does not transmit enquiries.
+html = html.replace(/\sdata-netlify="true"/g,'').replace(/\snetlify-honeypot="bot-field"/g,'');
 if (!html.includes('name="robots" content="noindex,nofollow"')) throw Error('Review safety flag missing');
 writeFileSync(join(out, 'index.html'), html, 'utf8');
 for (const file of ['404.html','favicon.svg','robots.txt','_headers']) copyFileSync(file,join(out,file));
