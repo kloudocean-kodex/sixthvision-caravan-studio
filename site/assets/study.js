@@ -54,6 +54,9 @@ let request = 0;
 let lastFrame = 0;
 let isXray = false;
 let studyIsVisible = true;
+let trackStart = 0;
+let trackTravel = 0;
+let loadedStudy = false;
 
 const chapterList = document.querySelector('#beat-nav-list');
 const chapterButtons = chapters.map(([label], index) => {
@@ -80,23 +83,26 @@ function render(progress) {
   const opening = ease(.04, .46, progress);
   const pullback = ease(.55, .93, progress);
   const movement = reduce.matches ? 0 : (portrait.matches ? .57 : 1) * (opening - pullback);
-  camera.style.setProperty('--camera-x', (-2.1 * movement).toFixed(3) + '%');
-  camera.style.setProperty('--camera-y', (-1.6 * movement).toFixed(3) + '%');
-  camera.style.setProperty('--camera-scale', (1 + .12 * movement).toFixed(4));
+  camera.style.transform = 'translate3d(' + (-2.1 * movement).toFixed(3) + '%,' +
+    (-1.6 * movement).toFixed(3) + '%,0) scale(' + (1 + .12 * movement).toFixed(4) + ')';
 
+  const assemblyOpacity = blend(progress, .20, .28, .47, .54) + blend(progress, .69, .76, .79, .84);
+  const showAssembly = assemblyOpacity > 0 && components.every(({element}) => element.naturalWidth > 0);
   setOpacity(cutaway, blend(progress, .08, .16, .28, .37));
-  setOpacity(assembly, blend(progress, .20, .28, .47, .54) + blend(progress, .69, .76, .79, .84));
+  setOpacity(assembly, showAssembly ? assemblyOpacity : 0);
   setOpacity(interior, blend(progress, .39, .48, .57, .65));
   setOpacity(detail, blend(progress, .57, .65, .70, .76));
   if (handoff) setOpacity(handoff, ease(.91, 1, progress));
 
-  for (const {element, x, y, start, end} of components) {
-    const separation = ease(start, end, progress) * (1 - ease(.73, .89, progress));
+  if (showAssembly) {
     const scale = portrait.matches ? .55 : 1;
-    element.style.setProperty('--piece-x', (x * separation * scale).toFixed(2) + '%');
-    element.style.setProperty('--piece-y', (y * separation * scale).toFixed(2) + '%');
+    for (const {element, x, y, start, end} of components) {
+      const separation = ease(start, end, progress) * (1 - ease(.73, .89, progress)) * scale;
+      element.style.transform = 'translate3d(' + (x * separation).toFixed(2) + '%,' +
+        (y * separation).toFixed(2) + '%,0)';
+    }
   }
-  hotspots.hidden = isXray || reduce.matches || progress < .26 || progress > .41;
+  hotspots.hidden = !showAssembly || isXray || reduce.matches || progress < .26 || progress > .41;
   scrubber.value = Math.round(progress * 1000);
 
   const index = chapterAt(progress);
@@ -143,17 +149,29 @@ function setProgress(progress, immediate = false) {
   }
 }
 
-function travel() {
-  return track.offsetHeight - frame.offsetHeight;
+function readScroll() {
+  if (pin.matches && trackTravel > 0) setProgress((scrollY - trackStart) / trackTravel);
 }
 
-function readScroll() {
+function measureTrack() {
   if (!pin.matches) return;
-  const distance = travel();
-  if (distance > 0) setProgress((parseFloat(getComputedStyle(frame).top) - track.getBoundingClientRect().top) / distance);
+  trackStart = scrollY + track.getBoundingClientRect().top - parseFloat(getComputedStyle(frame).top);
+  trackTravel = track.offsetHeight - frame.offsetHeight;
+  readScroll();
+}
+
+function loadStudy() {
+  if (loadedStudy) return;
+  loadedStudy = true;
+  viewport.querySelectorAll('img[data-src]').forEach(image => {
+    image.addEventListener('load', () => render(rendered), { once: true });
+    image.loading = 'eager';
+    image.src = image.dataset.src;
+  });
 }
 
 function setMode(enabled) {
+  loadStudy();
   isXray = enabled;
   xray.hidden = !enabled;
   camera.style.visibility = enabled ? 'hidden' : '';
@@ -171,12 +189,10 @@ function setMode(enabled) {
 }
 
 function seek(progress, immediate = false) {
+  loadStudy();
   if (isXray) setMode(false);
   setProgress(progress, immediate);
-  if (pin.matches) {
-    const start = window.scrollY + track.getBoundingClientRect().top - parseFloat(getComputedStyle(frame).top);
-    window.scrollTo(0, start + travel() * progress);
-  }
+  if (pin.matches) window.scrollTo(0, trackStart + trackTravel * progress);
 }
 
 function goToChapter(index) {
@@ -218,11 +234,23 @@ if ('IntersectionObserver' in window) {
     studyIsVisible = state.isIntersecting;
     if (!studyIsVisible && request) setProgress(requested, true);
   }).observe(track);
+  const studyLoader = new IntersectionObserver(([state]) => {
+    if (!state.isIntersecting) return;
+    studyLoader.disconnect();
+    loadStudy();
+  }, { rootMargin: '320px' });
+  studyLoader.observe(track);
+} else {
+  loadStudy();
+}
+if ('ResizeObserver' in window) {
+  const changes = new ResizeObserver(measureTrack);
+  [track, frame, document.querySelector('#top'), document.querySelector('#services')].forEach(node => changes.observe(node));
 }
 window.addEventListener('scroll', readScroll, { passive: true });
-window.addEventListener('resize', readScroll, { passive: true });
-pin.addEventListener('change', readScroll);
+window.addEventListener('resize', measureTrack, { passive: true });
+pin.addEventListener('change', measureTrack);
 portrait.addEventListener('change', () => setProgress(requested, true));
 reduce.addEventListener('change', () => setProgress(requested, true));
 render(0);
-readScroll();
+measureTrack();

@@ -93,9 +93,11 @@ function portfolio() {
 }
 
 const hero = media?.hero;
-const socialImage = hero ? sourceAsset(hero.file, 'image') : studyFolder + studies[0][3];
+const socialImage = hero ? sourceAsset(hero.file, 'image') : studyFolder + 'lighting-study-hero.webp';
 const photo = hero ? responsiveImage(hero, { eager: true }) :
-  '<img src="' + studyFolder + studies[0][3] + '" width="1536" height="1024" alt="' +
+  '<img src="' + studyFolder + 'lighting-study-hero.webp" srcset="' + studyFolder +
+  'lighting-study-hero-small.webp 720w, ' + studyFolder + 'lighting-study-hero.webp 1376w" ' +
+  'sizes="(max-width: 680px) 92vw, 49vw" width="1376" height="768" alt="' +
   escape(studies[0][2]) + '" fetchpriority="high" decoding="async">';
 const heroMarkup = hero
   ? '<figure class="hero-media">' + photo + '<figcaption class="hero-media-caption">' + escape(hero.caption) + '</figcaption></figure>'
@@ -121,7 +123,7 @@ const studyGallery = gallery(studies.map(([category, title, alt, file]) => ({
   image: '<img loading="lazy" decoding="async" src="' + studyFolder + file + '" alt="' + escape(alt) + '">',
 })));
 const handoff = media?.handoff || hero;
-const studyHandoff = handoff ? '<img id="plate-handoff" loading="lazy" alt="" src="' +
+const studyHandoff = handoff ? '<img id="plate-handoff" loading="lazy" alt="" data-src="' +
   sourceAsset(handoff.small || handoff.file, 'image') + '">' : '';
 
 const replacements = {
